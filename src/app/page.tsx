@@ -392,10 +392,10 @@ export default function Home() {
           {/* Logo */}
           <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }} className="flex items-center gap-2.5 group">
             <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-lg group-hover:shadow-[rgba(212,56,13,0.3)]">
-              <span className="text-white text-sm font-black tracking-tight">YJ</span>
+              <span className="text-white text-[11px] font-black tracking-tight">YJ</span>
             </div>
             <span className={`text-[22px] font-extrabold tracking-tight transition-colors duration-300 ${scrolled ? "text-gray-900" : "text-white"}`}>
-              FOOD
+              F&amp;B
             </span>
           </a>
 
@@ -462,7 +462,7 @@ export default function Home() {
       {/* ━━━━━━━━━━ HERO ━━━━━━━━━━ */}
       <section className="relative h-screen min-h-[750px] flex items-center justify-center overflow-hidden bg-black">
         {/* Ken Burns BG */}
-        <Image src="/images/대표사진.jpg" alt="YJFOOD 대표 메뉴" fill className="object-cover ken-burns" priority quality={85} />
+        <Image src="/images/대표사진.jpg" alt="YJF&amp;B 대표 메뉴" fill className="object-cover ken-burns" priority quality={85} style={{ objectPosition: "30% center" }} />
 
         {/* Gradient overlays */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.6) 100%)" }} />
@@ -484,42 +484,18 @@ export default function Home() {
             Franchise Recruitment
           </p>
 
-          <h1 ref={heroSplitRef} className="text-[2.8rem] sm:text-6xl md:text-[5.5rem] font-black mb-3 tracking-tight">
-            <SplitText text="맛으로 승부하는" visible={heroSplitVisible} />
-          </h1>
-          <h1 className="text-[2.8rem] sm:text-6xl md:text-[5.5rem] font-black mb-8 tracking-tight">
-            {heroSplitVisible ? (
-              "YJFOOD".split("").map((char, i) => (
-                <span
-                  key={i}
-                  className="letter-anim text-shimmer inline-block"
-                  style={{ animationDelay: `${400 + i * 40}ms` }}
-                >
-                  {char}
-                </span>
-              ))
-            ) : (
-              <span style={{ opacity: 0 }}>YJFOOD</span>
-            )}
-          </h1>
-
-          <div style={{ opacity: heroReady ? 1 : 0, transition: "opacity 1s ease 1.2s" }}>
-            <p className="text-lg sm:text-xl mb-2 font-medium" style={{ color: "rgba(255,255,255,0.85)" }}>
-              <Typewriter texts={["부산촌놈둘 · 제육브로 · 시골할매구이집", "가맹비 무료 · 교육비 무료", "창업비용 2,000만원 이내"]} speed={70} pause={2000} />
-            </p>
-          </div>
-
           <div
-            className="flex flex-wrap justify-center gap-3 mt-8 mb-14"
+            className="flex flex-wrap justify-center gap-3 mb-14"
             style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s cubic-bezier(0.22,1,0.36,1) 1.5s" }}
           >
-            {["가맹비 무료", "교육비 무료"].map((t) => (
-              <span key={t} className="backdrop-blur-md border px-5 py-2.5 rounded-full text-sm font-semibold" style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)" }}>
-                {t}
-              </span>
-            ))}
+            <span className="backdrop-blur-md border px-5 py-2.5 rounded-full text-sm font-semibold" style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)" }}>
+              가맹비 <span className="line-through opacity-60">300만원</span>
+            </span>
+            <span className="backdrop-blur-md border px-5 py-2.5 rounded-full text-sm font-semibold" style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)" }}>
+              교육비 <span className="line-through opacity-60">200만원</span>
+            </span>
             <span className="backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-bold border" style={{ background: "rgba(249,115,22,0.85)", borderColor: "rgba(249,115,22,0.4)" }}>
-              창업비용 2,000만원 이내
+              선착순 10호점까지 무료
             </span>
           </div>
 
@@ -557,7 +533,7 @@ export default function Home() {
         <div className="flex whitespace-nowrap marquee-track">
           {Array.from({ length: 10 }).map((_, i) => (
             <span key={i} className="flex items-center gap-8 mx-8 text-sm font-bold tracking-wide">
-              {["가맹비 무료", "교육비 무료", "2,000만원 이내 창업", "3개 브랜드 동시 운영"].map((t) => (
+              {["선착순 10호점 가맹비·교육비 무료", "2,000만원 이내 창업", "3개 브랜드 동시 운영"].map((t) => (
                 <span key={t} className="flex items-center gap-3">
                   <span className="text-accent text-lg">&#x2726;</span>
                   <span style={{ color: "rgba(255,255,255,0.5)" }}>{t}</span>
@@ -576,17 +552,17 @@ export default function Home() {
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
           <SectionHead
-            label="About YJFOOD"
+            label="About YJF&amp;B"
             title="대한민국 외식 프랜차이즈의"
             titleAccent="새로운 기준"
-            desc="YJFOOD는 검증된 3개 브랜드를 통해 예비 창업자에게 최소 비용, 최대 수익의 창업 기회를 제공합니다. 가맹비·교육비 무료, 2,000만원 이내 창업으로 여러분의 성공을 함께 만들어갑니다."
+            desc="YJF&B는 검증된 3개 브랜드를 통해 예비 창업자에게 최소 비용, 최대 수익의 창업 기회를 제공합니다. 선착순 10호점까지 가맹비·교육비 무료, 2,000만원 이내 창업으로 여러분의 성공을 함께 만들어갑니다."
           />
 
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-7">
             {[
-              { value: "0", unit: "원", desc: "가맹비 전액 무료", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" },
-              { value: "0", unit: "원", desc: "교육비 전액 무료", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" },
+              { value: "300", unit: "만원", desc: "가맹비 (10호점까지 무료)", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", strike: true },
+              { value: "200", unit: "만원", desc: "교육비 (10호점까지 무료)", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253", strike: true },
               { value: "2,000", unit: "만원", desc: "이내 올인원 창업", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
               { value: "3", unit: "개", desc: "브랜드 동시 운영", icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" },
             ].map((b, i) => (
@@ -596,7 +572,7 @@ export default function Home() {
                     <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
                       <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={b.icon} /></svg>
                     </div>
-                    <div className="text-4xl sm:text-5xl font-black text-primary mb-3 whitespace-nowrap">
+                    <div className={`text-4xl sm:text-5xl font-black text-primary mb-3 whitespace-nowrap ${(b as Record<string, unknown>).strike ? "line-through decoration-2 opacity-70" : ""}`}>
                       <Counter value={b.value} suffix={b.unit} />
                     </div>
                     <p className="text-sm text-gray-500 font-medium">{b.desc}</p>
@@ -617,8 +593,8 @@ export default function Home() {
         <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
           <Anim>
             <h3 className="text-3xl sm:text-4xl md:text-5xl font-black mb-6">
-              가맹비 · 교육비{" "}
-              <span className="text-shimmer">완전 무료</span>
+              선착순 10호점{" "}
+              <span className="text-shimmer">가맹비 · 교육비 무료</span>
             </h3>
             <p className="text-xl sm:text-2xl font-bold mb-4">
               창업비용{" "}
@@ -649,7 +625,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <SectionHead
             label="Our Brands"
-            title="YJFOOD의"
+            title="YJF&amp;B의"
             titleAccent="3대 브랜드"
             desc="각기 다른 매력의 3가지 브랜드로 다양한 고객층을 사로잡으세요"
           />
@@ -798,7 +774,7 @@ export default function Home() {
                 { step: "01", title: "창업 상담", desc: "전화·온라인 상담", icon: "M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" },
                 { step: "02", title: "상권 분석", desc: "입지 선정 및 분석", icon: "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" },
                 { step: "03", title: "계약 체결", desc: "가맹 계약 진행", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
-                { step: "04", title: "매장 시공", desc: "인테리어 및 설비", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" },
+                { step: "04", title: "인테리어 컨설팅", desc: "자율시공 가능(점주부담 최소화)", icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" },
                 { step: "05", title: "그랜드 오픈", desc: "오픈 지원 및 교육", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" },
               ].map((p, i) => (
                 <Anim key={p.step} type="scale" delay={i * 150}>
@@ -841,7 +817,7 @@ export default function Home() {
             </h3>
             <div className="flex flex-wrap justify-center gap-4 mb-10">
               <span className="backdrop-blur-sm px-6 py-3 rounded-full text-lg font-bold border" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.25)" }}>
-                가맹비 · 교육비 전액 무료
+                선착순 10호점 가맹비 · 교육비 무료
               </span>
               <span className="backdrop-blur-sm px-6 py-3 rounded-full text-lg font-bold border" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.25)" }}>
                 2,000만원 이내 소자본 창업
@@ -959,12 +935,12 @@ export default function Home() {
             <div className="text-center md:text-left">
               <div className="flex items-center gap-2.5 justify-center md:justify-start mb-4">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <span className="text-white text-sm font-black">YJ</span>
+                  <span className="text-white text-[11px] font-black">YJ</span>
                 </div>
-                <span className="text-white text-2xl font-black">FOOD</span>
+                <span className="text-white text-2xl font-black">F&amp;B</span>
               </div>
               <p className="text-sm" style={{ color: "rgba(255,255,255,0.35)" }}>
-                맛으로 승부하는 외식 프랜차이즈
+                부산촌놈둘 &middot; 제육브로 &middot; 시골할매구이집
               </p>
             </div>
 
@@ -995,12 +971,12 @@ export default function Home() {
           {/* Bottom */}
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8">
             <div className="flex items-center gap-4">
-              <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>상호: YJFOOD</p>
+              <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>상호: YJF&amp;B</p>
               <span style={{ color: "rgba(255,255,255,0.1)" }}>|</span>
               <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>부산촌놈둘 · 제육브로 · 시골할매구이집</p>
             </div>
             <p className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
-              &copy; {new Date().getFullYear()} YJFOOD. All rights reserved.
+              &copy; {new Date().getFullYear()} YJF&amp;B. All rights reserved.
             </p>
           </div>
         </div>

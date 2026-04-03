@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "YJFOOD | 부산촌놈둘 · 제육브로 · 시골할매구이집",
+  title: "YJF&B | 부산촌놈둘 · 제육브로 · 시골할매구이집",
   description:
-    "YJFOOD 가맹점 모집 - 가맹비·교육비 무료, 창업비용 2,000만원 이내. 부산촌놈둘, 제육브로, 시골할매구이집 창업 상담을 지금 시작하세요.",
+    "YJF&B 가맹점 모집 - 선착순 10호점 가맹비·교육비 무료, 창업비용 2,000만원 이내. 부산촌놈둘, 제육브로, 시골할매구이집 창업 상담을 지금 시작하세요.",
 };
 
 export default function RootLayout({
