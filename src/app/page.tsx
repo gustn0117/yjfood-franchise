@@ -484,6 +484,13 @@ export default function Home() {
             Franchise Recruitment
           </p>
 
+          <h1
+            className="text-[2.8rem] sm:text-6xl md:text-[5.5rem] font-black mb-8 tracking-tight"
+            style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? "translateY(0)" : "translateY(20px)", transition: "all 1s cubic-bezier(0.22,1,0.36,1) 0.5s" }}
+          >
+            YJ <span className="text-shimmer">F&amp;B</span>
+          </h1>
+
           <div
             className="flex flex-wrap justify-center gap-3 mb-14"
             style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s cubic-bezier(0.22,1,0.36,1) 1.5s" }}
