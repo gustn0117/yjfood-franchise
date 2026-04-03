@@ -8,6 +8,8 @@ import {
   type MouseEvent as ReactMouseEvent,
 } from "react";
 import Image from "next/image";
+import type L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
 /* ─────────────────────────────────────────────── */
 /*                     DATA                        */
@@ -71,6 +73,28 @@ const SUPPORTS = [
   { title: "마케팅 지원", desc: "배달앱, SNS, 블로그 등 다양한 채널의 온·오프라인 마케팅을 지원합니다.", icon: "M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z", gradient: "from-pink-500 to-rose-400" },
   { title: "물류 시스템", desc: "본사 직영 물류센터에서 신선한 식자재를 안정적으로 공급합니다.", icon: "M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0", gradient: "from-amber-500 to-yellow-400" },
   { title: "사후 관리", desc: "오픈 이후에도 지속적인 슈퍼바이저 방문과 매출 관리를 지원합니다.", icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z", gradient: "from-red-500 to-orange-400" },
+];
+
+/* ───────── STORE LOCATIONS ───────── */
+const STORES: { region: string; stores: { name: string; address: string; lat: number; lng: number }[] }[] = [
+  {
+    region: "부산",
+    stores: [
+      { name: "본점", address: "수영구 수영로 666번길 60", lat: 35.1553, lng: 129.1133 },
+      { name: "서면직영점", address: "부산진구 부암동 680-21 2층", lat: 35.1579, lng: 129.0600 },
+      { name: "연산점", address: "연제구 월드컵대로 10번길 10 1층", lat: 35.1822, lng: 129.0797 },
+      { name: "해운대점", address: "해운대구 대천로 205", lat: 35.1631, lng: 129.1635 },
+      { name: "금정점", address: "금정구 기찰로 17", lat: 35.2435, lng: 129.0921 },
+      { name: "사직점", address: "동래구 여고로 113번길 42-1", lat: 35.1960, lng: 129.0618 },
+      { name: "중서구점", address: "중구 흑교로21번길 20", lat: 35.1048, lng: 129.0301 },
+    ],
+  },
+  {
+    region: "경기도",
+    stores: [
+      { name: "부천점", address: "부천시 원미구 중동 1149", lat: 37.5034, lng: 126.7660 },
+    ],
+  },
 ];
 
 /* ─────────────────────────────────────────────── */
@@ -288,6 +312,70 @@ function GlowCard({
 }
 
 /* Section heading block */
+/* Leaflet Map */
+function StoreMap() {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInstance = useRef<L.Map | null>(null);
+
+  useEffect(() => {
+    if (!mapRef.current || mapInstance.current) return;
+
+    import("leaflet").then((L) => {
+      const map = L.map(mapRef.current!, {
+        center: [35.17, 129.07],
+        zoom: 11,
+        scrollWheelZoom: false,
+        zoomControl: false,
+      });
+
+      L.control.zoom({ position: "bottomright" }).addTo(map);
+
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 19,
+      }).addTo(map);
+
+      const markerIcon = L.divIcon({
+        className: "",
+        html: `<div style="width:32px;height:32px;background:linear-gradient(135deg,#d4380d,#f97316);border-radius:50%;border:3px solid #fff;box-shadow:0 4px 14px rgba(212,56,13,0.4);display:flex;align-items:center;justify-content:center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>`,
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+      });
+
+      const allStores = STORES.flatMap((r) => r.stores);
+      const bounds: L.LatLngExpression[] = [];
+
+      for (const s of allStores) {
+        const pos: L.LatLngExpression = [s.lat, s.lng];
+        bounds.push(pos);
+        L.marker(pos, { icon: markerIcon })
+          .addTo(map)
+          .bindPopup(
+            `<div style="font-family:Pretendard,sans-serif;padding:4px 2px"><strong style="font-size:14px;color:#d4380d">${s.name}</strong><br/><span style="font-size:12px;color:#666">${s.address}</span></div>`,
+            { closeButton: false, offset: [0, -8] }
+          );
+      }
+
+      if (bounds.length > 1) {
+        map.fitBounds(bounds as L.LatLngBoundsExpression, { padding: [50, 50], maxZoom: 13 });
+      }
+
+      mapInstance.current = map;
+
+      setTimeout(() => map.invalidateSize(), 300);
+    });
+
+    return () => {
+      if (mapInstance.current) {
+        mapInstance.current.remove();
+        mapInstance.current = null;
+      }
+    };
+  }, []);
+
+  return <div ref={mapRef} className="w-full h-full rounded-2xl" style={{ minHeight: 400 }} />;
+}
+
 function SectionHead({
   label, title, titleAccent, desc, dark = false,
 }: {
@@ -807,39 +895,73 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ━━━━━━━━━━ CTA BANNER 2 ━━━━━━━━━━ */}
-      <section className="relative py-32 overflow-hidden noise-overlay">
-        <ParallaxBg src="/images/사이드모음컷3.jpg" alt="사이드 메뉴" speed={0.2} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(212,56,13,0.93), rgba(249,115,22,0.93))" }} />
-        {/* Pattern overlay */}
-        <div className="absolute inset-0 pointer-events-none z-[2]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0)", backgroundSize: "40px 40px" }} />
+      {/* ━━━━━━━━━━ STORE MAP ━━━━━━━━━━ */}
+      <section id="stores" className="relative py-32 sm:py-40 overflow-hidden" style={{ background: "linear-gradient(180deg, #f8f8f8, #ffffff)" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <SectionHead
+            label="Our Stores"
+            title="전국"
+            titleAccent="가맹점 현황"
+            desc="YJF&B의 검증된 맛, 전국으로 확장 중입니다"
+          />
 
-        <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
-          <Anim>
-            <div className="inline-flex w-20 h-20 rounded-full items-center justify-center mb-6" style={{ background: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}>
-              <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" /></svg>
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
+            {/* Store list */}
+            <div className="lg:col-span-2 space-y-6">
+              {STORES.map((region, ri) => (
+                <Anim key={region.region} delay={ri * 100}>
+                  <div className="bg-white rounded-2xl p-6 border border-gray-100" style={{ boxShadow: "0 4px 24px rgba(0,0,0,0.04)" }}>
+                    <div className="flex items-center gap-3 mb-5">
+                      <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                        <svg className="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <h4 className="text-lg font-bold">{region.region}</h4>
+                      <span className="ml-auto text-xs font-bold text-primary bg-red-50 px-2.5 py-1 rounded-full">{region.stores.length}개점</span>
+                    </div>
+                    <div className="space-y-3">
+                      {region.stores.map((s) => (
+                        <div key={s.name} className="flex items-start gap-3 group">
+                          <div className="mt-0.5 w-5 h-5 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0">
+                            <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                            </svg>
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-sm font-bold text-gray-800 group-hover:text-primary transition-colors">{s.name}</p>
+                            <p className="text-xs text-gray-400 mt-0.5">{s.address}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </Anim>
+              ))}
+
+              {/* CTA */}
+              <Anim delay={200}>
+                <button
+                  onClick={() => scrollTo("#contact")}
+                  className="group w-full flex items-center justify-center gap-2 py-4 rounded-2xl text-white font-bold transition-all duration-300 hover:scale-[1.02] hover:shadow-xl"
+                  style={{ background: "linear-gradient(135deg, #d4380d, #f97316)" }}
+                >
+                  가맹 문의하기
+                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+              </Anim>
             </div>
-            <h3 className="text-3xl sm:text-4xl md:text-[3.2rem] font-black mb-8 leading-tight">
-              지금이 창업의 적기입니다
-            </h3>
-            <div className="flex flex-wrap justify-center gap-4 mb-10">
-              <span className="backdrop-blur-sm px-6 py-3 rounded-full text-lg font-bold border" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.25)" }}>
-                선착순 10호점 가맹비 · 교육비 무료
-              </span>
-              <span className="backdrop-blur-sm px-6 py-3 rounded-full text-lg font-bold border" style={{ background: "rgba(255,255,255,0.15)", borderColor: "rgba(255,255,255,0.25)" }}>
-                2,000만원 이내 소자본 창업
-              </span>
-            </div>
-            <button
-              onClick={() => scrollTo("#contact")}
-              className="group inline-flex items-center gap-3 bg-white text-primary hover:bg-gray-50 px-14 py-5 rounded-full text-lg font-bold transition-all duration-300 hover:scale-105 hover:shadow-[0_20px_60px_rgba(0,0,0,0.2)]"
-            >
-              무료 상담 신청
-              <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </button>
-          </Anim>
+
+            {/* Map */}
+            <Anim className="lg:col-span-3" type="slide-right" delay={150}>
+              <div className="rounded-2xl overflow-hidden border border-gray-200" style={{ boxShadow: "0 8px 40px rgba(0,0,0,0.08)" }}>
+                <StoreMap />
+              </div>
+            </Anim>
+          </div>
         </div>
       </section>
 
