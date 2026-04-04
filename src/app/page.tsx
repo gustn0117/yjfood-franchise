@@ -30,10 +30,10 @@ const BRANDS = [
     accent: "#f97316",
     icon: "M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z",
     menus: [
-      { name: "광안리 플렉스커플 SET (3인분)", img: "/images/부산촌놈들_광안리+플렉스커플set(3인분).jpg" },
-      { name: "기장 낭만가득 SET (2인분)", img: "/images/부산촌놈들_기장낭만가득set(2인분.jpg" },
-      { name: "서면 MZ 가성비 SET (1.5인분)", img: "/images/부산촌놈들_서면+MZ+가성비set(1.5인분).jpg" },
-      { name: "연산동 도시남녀 혼밥 SET (1.5인분)", img: "/images/부산촌놈들_연산동+도시남녀+혼밥set(1.5인분).jpg" },
+      { name: "광안리 플렉스커플 SET (3인분)", img: "/images/busan-gwanganri-3.jpg" },
+      { name: "기장 낭만가득 SET (2인분)", img: "/images/busan-gijang-2.jpg" },
+      { name: "서면 MZ 가성비 SET (1.5인분)", img: "/images/busan-seomyeon-1.5.jpg" },
+      { name: "연산동 도시남녀 혼밥 SET (1.5인분)", img: "/images/busan-yeonsandong-1.5.jpg" },
     ],
   },
   {
@@ -44,10 +44,10 @@ const BRANDS = [
     accent: "#e11d48",
     icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
     menus: [
-      { name: "1인 실속 세트", img: "/images/제육브로_1인실속.jpg" },
-      { name: "2인 든든 세트", img: "/images/제육브로_2인든든.jpg" },
-      { name: "3인 한상 세트", img: "/images/제육브로_3인한상.jpg" },
-      { name: "제육돈까스", img: "/images/제육브로_제육돈까.jpg" },
+      { name: "1인 실속 세트", img: "/images/jeyuk-1.jpg" },
+      { name: "2인 든든 세트", img: "/images/jeyuk-2.jpg" },
+      { name: "3인 한상 세트", img: "/images/jeyuk-3.jpg" },
+      { name: "제육돈까스", img: "/images/jeyuk-donkatsu.jpg" },
     ],
   },
   {
@@ -58,10 +58,10 @@ const BRANDS = [
     accent: "#d97706",
     icon: "M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6",
     menus: [
-      { name: "고기면 세트", img: "/images/시골할매구이집_고기면세트.jpg" },
-      { name: "고기볶음밥 세트", img: "/images/시골할매구이집_고기볶음밥세트.jpg" },
-      { name: "고기비빔밥 세트", img: "/images/시골할매구이집_고기비빔밥세트.jpg" },
-      { name: "밥상다리 부러질 세트", img: "/images/시골할매구이집_밥상다리부러질2.jpg" },
+      { name: "고기면 세트", img: "/images/sigol-noodle.jpg" },
+      { name: "고기볶음밥 세트", img: "/images/sigol-friedrice.jpg" },
+      { name: "고기비빔밥 세트", img: "/images/sigol-bibimbap.jpg" },
+      { name: "밥상다리 부러질 세트", img: "/images/sigol-full.jpg" },
     ],
   },
 ];
@@ -692,7 +692,7 @@ export default function Home() {
       {/* ━━━━━━━━━━ HERO ━━━━━━━━━━ */}
       <section className="relative h-screen min-h-[750px] flex items-center justify-center overflow-hidden bg-black">
         {/* Ken Burns BG */}
-        <Image src="/images/대표사진.jpg" alt="YJF&amp;B 대표 메뉴" fill className="object-cover ken-burns" priority quality={85} style={{ objectPosition: "30% center" }} />
+        <Image src="/images/hero.jpg" alt="YJF&amp;B 대표 메뉴" fill className="object-cover ken-burns" priority quality={85} style={{ objectPosition: "30% center" }} />
 
         {/* Gradient overlays */}
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.6) 100%)" }} />
@@ -718,7 +718,7 @@ export default function Home() {
             className="text-[2.8rem] sm:text-6xl md:text-[5.5rem] font-black mb-8 tracking-tight"
             style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? "translateY(0)" : "translateY(20px)", transition: "all 1s cubic-bezier(0.22,1,0.36,1) 0.5s" }}
           >
-            소자본 창업,{" "}<span className="text-shimmer">효율적인 시스템</span>
+            맛으로 승부하는{" "}<span className="text-shimmer">브랜드</span>
           </h1>
 
           <div
@@ -823,7 +823,7 @@ export default function Home() {
 
       {/* ━━━━━━━━━━ CTA BANNER 1 ━━━━━━━━━━ */}
       <section className="relative py-28 overflow-hidden noise-overlay">
-        <ParallaxBg src="/images/메뉴모음컷2.jpg" alt="메뉴 모음" speed={0.2} />
+        <ParallaxBg src="/images/menu-collection.jpg" alt="메뉴 모음" speed={0.2} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5))" }} />
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at center, rgba(212,56,13,0.2), transparent 70%)" }} />
 
@@ -862,8 +862,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <SectionHead
             label="Our Brands"
-            title="YJF&amp;B의"
-            titleAccent="3대 브랜드"
+            title="소자본 창업,"
+            titleAccent="효율적인 시스템"
             desc="각기 다른 매력의 3가지 브랜드로 다양한 고객층을 사로잡으세요"
           />
 
