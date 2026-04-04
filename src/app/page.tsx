@@ -718,7 +718,7 @@ export default function Home() {
             className="text-[2.8rem] sm:text-6xl md:text-[5.5rem] font-black mb-8 tracking-tight"
             style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? "translateY(0)" : "translateY(20px)", transition: "all 1s cubic-bezier(0.22,1,0.36,1) 0.5s" }}
           >
-            맛으로 승부하는 <span className="text-shimmer">브랜드</span>
+            소자본 창업,{" "}<span className="text-shimmer">효율적인 시스템</span>
           </h1>
 
           <div
@@ -726,7 +726,7 @@ export default function Home() {
             style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? "translateY(0)" : "translateY(20px)", transition: "all 0.8s cubic-bezier(0.22,1,0.36,1) 1.5s" }}
           >
             <span className="backdrop-blur-md border px-5 py-2.5 rounded-full text-sm font-semibold" style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)" }}>
-              가맹비 <span className="line-through opacity-60">300만원</span>
+              가맹비 <span className="line-through opacity-60">550만원</span>
             </span>
             <span className="backdrop-blur-md border px-5 py-2.5 rounded-full text-sm font-semibold" style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)" }}>
               교육비 <span className="line-through opacity-60">200만원</span>
@@ -798,7 +798,7 @@ export default function Home() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-7">
             {[
-              { value: "300", unit: "만원", desc: "가맹비 (10호점까지 무료)", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", strike: true },
+              { value: "550", unit: "만원", desc: "가맹비 (10호점까지 무료)", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", strike: true },
               { value: "200", unit: "만원", desc: "교육비 (10호점까지 무료)", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253", strike: true },
               { value: "2,000", unit: "만원", desc: "이내 올인원 창업", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
               { value: "3", unit: "개", desc: "브랜드 동시 운영", icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" },
@@ -934,7 +934,7 @@ export default function Home() {
                     className="group bg-white rounded-[1.5rem] overflow-hidden card-3d border border-gray-100"
                     style={{ animationDelay: `${mi * 80}ms` }}
                   >
-                    <div className="relative aspect-[4/5] overflow-hidden">
+                    <div className="relative aspect-square overflow-hidden">
                       <Image
                         src={menu.img}
                         alt={menu.name}
@@ -1191,20 +1191,6 @@ export default function Home() {
         className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
         style={{ opacity: showFloat ? 1 : 0, transform: showFloat ? "translateY(0)" : "translateY(30px)", pointerEvents: showFloat ? "auto" : "none", transition: "all 0.6s cubic-bezier(0.22,1,0.36,1)" }}
       >
-        {/* Phone */}
-        <a
-          href="tel:1544-5099"
-          className="group flex items-center gap-3 bg-white text-gray-800 pl-5 pr-6 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-gray-100"
-          style={{ opacity: showFloat ? 1 : 0, transform: showFloat ? "translateX(0)" : "translateX(20px)", transition: "all 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s" }}
-        >
-          <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center">
-            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-          </div>
-          <span className="text-sm font-bold">1544-5099</span>
-        </a>
-
         {/* Chat CTA */}
         <button
           onClick={() => scrollTo("#contact")}
@@ -1223,6 +1209,20 @@ export default function Home() {
             </svg>
           </div>
         </button>
+
+        {/* Phone */}
+        <a
+          href="tel:1544-5099"
+          className="group flex items-center gap-3 bg-white text-gray-800 pl-5 pr-6 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-gray-100"
+          style={{ opacity: showFloat ? 1 : 0, transform: showFloat ? "translateX(0)" : "translateX(20px)", transition: "all 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s" }}
+        >
+          <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center">
+            <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+          </div>
+          <span className="text-sm font-bold">1544-5099</span>
+        </a>
       </div>
     </>
   );
