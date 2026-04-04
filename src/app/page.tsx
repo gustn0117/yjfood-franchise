@@ -1097,14 +1097,19 @@ export default function Home() {
             </button>
           </div>
 
-          {/* Bottom */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8">
-            <div className="flex items-center gap-4">
-              <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>상호: YJF&amp;B</p>
-              <span style={{ color: "rgba(255,255,255,0.1)" }}>|</span>
-              <p className="text-xs" style={{ color: "rgba(255,255,255,0.25)" }}>부산촌놈둘 · 제육브로 · 시골할매구이집</p>
+          {/* Business info */}
+          <div className="pt-8 space-y-3">
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1 text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+              <span>(주)와이제이에프앤비</span>
+              <span>대표: 김용현</span>
+              <span>사업자등록번호: 402-88-03725</span>
+              <span>법인등록번호: 180111-0165856</span>
             </div>
-            <p className="text-xs" style={{ color: "rgba(255,255,255,0.2)" }}>
+            <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1 text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
+              <span>부산광역시 수영구 수영로 666번길 60(광안동)</span>
+              <span>창업상담: 1544-5099</span>
+            </div>
+            <p className="text-xs text-center md:text-left" style={{ color: "rgba(255,255,255,0.2)" }}>
               &copy; {new Date().getFullYear()} YJF&amp;B. All rights reserved.
             </p>
           </div>
@@ -1118,7 +1123,7 @@ export default function Home() {
       >
         {/* Phone */}
         <a
-          href="tel:010-0000-0000"
+          href="tel:1544-5099"
           className="group flex items-center gap-3 bg-white text-gray-800 pl-5 pr-6 py-3 rounded-full shadow-xl transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-gray-100"
           style={{ opacity: showFloat ? 1 : 0, transform: showFloat ? "translateX(0)" : "translateX(20px)", transition: "all 0.5s cubic-bezier(0.22,1,0.36,1) 0.1s" }}
         >
@@ -1127,7 +1132,7 @@ export default function Home() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
           </div>
-          <span className="text-sm font-bold">전화 상담</span>
+          <span className="text-sm font-bold">1544-5099</span>
         </a>
 
         {/* Chat CTA */}
