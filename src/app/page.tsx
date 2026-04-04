@@ -718,7 +718,7 @@ export default function Home() {
             className="text-[2.8rem] sm:text-6xl md:text-[5.5rem] font-black mb-8 tracking-tight"
             style={{ opacity: heroReady ? 1 : 0, transform: heroReady ? "translateY(0)" : "translateY(20px)", transition: "all 1s cubic-bezier(0.22,1,0.36,1) 0.5s" }}
           >
-            맛으로 승부하는{" "}<span className="text-shimmer">브랜드</span>
+            소자본 창업,<br /><span className="text-shimmer">효율적인 시스템</span>
           </h1>
 
           <div
@@ -729,7 +729,7 @@ export default function Home() {
               가맹비 <span className="line-through opacity-60">550만원</span>
             </span>
             <span className="backdrop-blur-md border px-5 py-2.5 rounded-full text-sm font-semibold" style={{ background: "rgba(255,255,255,0.08)", borderColor: "rgba(255,255,255,0.2)" }}>
-              교육비 <span className="line-through opacity-60">200만원</span>
+              교육비 <span className="line-through opacity-60">550만원</span>
             </span>
             <span className="backdrop-blur-md px-5 py-2.5 rounded-full text-sm font-bold border" style={{ background: "rgba(249,115,22,0.85)", borderColor: "rgba(249,115,22,0.4)" }}>
               선착순 10호점까지 무료
@@ -799,7 +799,7 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 sm:gap-7">
             {[
               { value: "550", unit: "만원", desc: "가맹비 (10호점까지 무료)", icon: "M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z", strike: true },
-              { value: "200", unit: "만원", desc: "교육비 (10호점까지 무료)", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253", strike: true },
+              { value: "550", unit: "만원", desc: "교육비 (10호점까지 무료)", icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253", strike: true },
               { value: "2,000", unit: "만원", desc: "이내 올인원 창업", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
               { value: "3", unit: "개", desc: "브랜드 동시 운영", icon: "M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" },
             ].map((b, i) => (
@@ -860,21 +860,12 @@ export default function Home() {
       {/* ━━━━━━━━━━ BRANDS ━━━━━━━━━━ */}
       <section id="brands" className="relative py-32 sm:py-40 overflow-hidden" style={{ background: "linear-gradient(180deg, #f8f8f8, #ffffff)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <Anim className="text-center mb-20">
-            <p className="gradient-label font-bold text-sm tracking-[0.25em] uppercase mb-4">Our Brands</p>
-            <h2 className="text-3xl sm:text-4xl md:text-[3.2rem] font-black mb-2">맛으로 승부하는,</h2>
-            <h2 className="text-3xl sm:text-4xl md:text-[3.2rem] font-black mb-2">
-              <span className="relative inline-block text-primary">
-                브랜드
-                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 8" preserveAspectRatio="none">
-                  <path d="M0 6 Q50 0 100 6 T200 6" stroke="#d4380d" strokeWidth="2.5" fill="none" opacity="0.35" />
-                </svg>
-              </span>
-            </h2>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 mt-4 mb-1">소자본 창업,</h3>
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 mb-5">효율적인 시스템</h3>
-            <p className="max-w-2xl mx-auto text-lg text-gray-500">각기 다른 매력의 3가지 브랜드로 다양한 고객층을 사로잡으세요</p>
-          </Anim>
+          <SectionHead
+            label="Our Brands"
+            title="YJF&amp;B의"
+            titleAccent="3대 브랜드"
+            desc="각기 다른 매력의 3가지 브랜드로 다양한 고객층을 사로잡으세요"
+          />
 
           {/* Brand tabs */}
           <Anim className="flex justify-center gap-3 sm:gap-4 mb-6 flex-wrap">
