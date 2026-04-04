@@ -860,12 +860,21 @@ export default function Home() {
       {/* ━━━━━━━━━━ BRANDS ━━━━━━━━━━ */}
       <section id="brands" className="relative py-32 sm:py-40 overflow-hidden" style={{ background: "linear-gradient(180deg, #f8f8f8, #ffffff)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <SectionHead
-            label="Our Brands"
-            title="소자본 창업,"
-            titleAccent="효율적인 시스템"
-            desc="각기 다른 매력의 3가지 브랜드로 다양한 고객층을 사로잡으세요"
-          />
+          <Anim className="text-center mb-20">
+            <p className="gradient-label font-bold text-sm tracking-[0.25em] uppercase mb-4">Our Brands</p>
+            <h2 className="text-3xl sm:text-4xl md:text-[3.2rem] font-black mb-2">맛으로 승부하는,</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-[3.2rem] font-black mb-2">
+              <span className="relative inline-block text-primary">
+                브랜드
+                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 8" preserveAspectRatio="none">
+                  <path d="M0 6 Q50 0 100 6 T200 6" stroke="#d4380d" strokeWidth="2.5" fill="none" opacity="0.35" />
+                </svg>
+              </span>
+            </h2>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 mt-4 mb-1">소자본 창업,</h3>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-600 mb-5">효율적인 시스템</h3>
+            <p className="max-w-2xl mx-auto text-lg text-gray-500">각기 다른 매력의 3가지 브랜드로 다양한 고객층을 사로잡으세요</p>
+          </Anim>
 
           {/* Brand tabs */}
           <Anim className="flex justify-center gap-3 sm:gap-4 mb-6 flex-wrap">
