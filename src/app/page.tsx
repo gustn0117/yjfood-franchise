@@ -410,6 +410,148 @@ function SectionHead({
 }
 
 /* ═══════════════════════════════════════════════ */
+/*                 CONTACT FORM                    */
+/* ═══════════════════════════════════════════════ */
+function ContactForm() {
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const brands = fd.getAll("brands") as string[];
+    const body = {
+      name: fd.get("name"),
+      phone: fd.get("phone"),
+      region: fd.get("region"),
+      brands,
+      type: fd.get("type") || "",
+      message: fd.get("message"),
+    };
+    try {
+      const res = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        alert("접수에 실패했습니다. 다시 시도해주세요.");
+      }
+    } catch {
+      alert("네트워크 오류가 발생했습니다.");
+    }
+    setSubmitting(false);
+  };
+
+  if (submitted) {
+    return (
+      <div
+        className="relative bg-white rounded-[2rem] p-8 sm:p-12 text-center overflow-hidden"
+        style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03)" }}
+      >
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full mb-6" style={{ background: "linear-gradient(135deg, #d4380d, #f97316)" }}>
+          <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-2">상담 신청이 접수되었습니다!</h3>
+        <p className="text-gray-500 mb-6">빠른 시일 내에 연락드리겠습니다.</p>
+        <button
+          onClick={() => setSubmitted(false)}
+          className="px-6 py-3 rounded-xl text-sm font-bold text-primary border-2 border-primary hover:bg-primary hover:text-white transition-all"
+        >
+          추가 문의하기
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <form
+      className="relative bg-white rounded-[2rem] p-8 sm:p-12 space-y-7 overflow-hidden"
+      style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03)" }}
+      onSubmit={handleSubmit}
+    >
+      {/* Corner deco */}
+      <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(253,242,233,1), transparent 70%)" }} />
+      <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(249,115,22,0.06), transparent 70%)" }} />
+
+      <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2.5">성함 <span className="text-primary">*</span></label>
+          <input name="name" type="text" required placeholder="홍길동" className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all bg-gray-50/50 focus:bg-white text-[15px]" />
+        </div>
+        <div>
+          <label className="block text-sm font-bold text-gray-700 mb-2.5">연락처 <span className="text-primary">*</span></label>
+          <input name="phone" type="tel" required placeholder="010-0000-0000" className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all bg-gray-50/50 focus:bg-white text-[15px]" />
+        </div>
+      </div>
+
+      <div className="relative">
+        <label className="block text-sm font-bold text-gray-700 mb-2.5">희망 창업 지역</label>
+        <input name="region" type="text" placeholder="예: 서울 강남구" className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all bg-gray-50/50 focus:bg-white text-[15px]" />
+      </div>
+
+      <div className="relative">
+        <label className="block text-sm font-bold text-gray-700 mb-2.5">관심 브랜드</label>
+        <div className="flex flex-wrap gap-3">
+          {BRANDS.map((b) => (
+            <label key={b.name} className="flex items-center gap-2.5 px-5 py-3 rounded-2xl border border-gray-200 hover:border-primary cursor-pointer transition-all duration-300 hover:shadow-sm bg-gray-50/50 hover:bg-warm group">
+              <input type="checkbox" name="brands" value={b.name} className="w-4 h-4 text-primary rounded-md focus:ring-primary" />
+              <span className="text-sm font-medium group-hover:text-primary transition-colors">{b.name}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative">
+        <label className="block text-sm font-bold text-gray-700 mb-2.5">구분</label>
+        <div className="flex gap-5">
+          {["신규 창업", "업종 변경"].map((opt) => (
+            <label key={opt} className="flex items-center gap-2 cursor-pointer group">
+              <input type="radio" name="type" value={opt} className="w-4 h-4 text-primary focus:ring-primary" />
+              <span className="text-sm font-medium group-hover:text-primary transition-colors">{opt}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative">
+        <label className="block text-sm font-bold text-gray-700 mb-2.5">문의 내용</label>
+        <textarea name="message" rows={4} placeholder="궁금하신 점을 자유롭게 남겨주세요" className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all resize-none bg-gray-50/50 focus:bg-white text-[15px]" />
+      </div>
+
+      <button
+        type="submit"
+        disabled={submitting}
+        className="relative w-full py-5 rounded-2xl text-lg font-bold text-white transition-all duration-300 hover:scale-[1.015] hover:shadow-xl overflow-hidden group disabled:opacity-70 disabled:hover:scale-100"
+        style={{ background: "linear-gradient(135deg, #d4380d, #f97316)" }}
+      >
+        <span className="relative z-10 flex items-center justify-center gap-2">
+          {submitting ? "접수 중..." : "창업 상담 신청하기"}
+          {!submitting && (
+            <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          )}
+        </span>
+        {/* Shine effect */}
+        <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)" }} />
+      </button>
+
+      <p className="text-xs text-gray-400 text-center">
+        제출 시 개인정보 수집 및 이용에 동의하는 것으로 간주합니다.
+      </p>
+    </form>
+  );
+}
+
+/* ═══════════════════════════════════════════════ */
 /*                   MAIN PAGE                     */
 /* ═══════════════════════════════════════════════ */
 export default function Home() {
@@ -977,79 +1119,7 @@ export default function Home() {
           />
 
           <Anim type="scale">
-            <form
-              className="relative bg-white rounded-[2rem] p-8 sm:p-12 space-y-7 overflow-hidden"
-              style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03)" }}
-              onSubmit={(e) => { e.preventDefault(); alert("상담 신청이 접수되었습니다. 빠른 시일 내에 연락드리겠습니다!"); }}
-            >
-              {/* Corner deco */}
-              <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(253,242,233,1), transparent 70%)" }} />
-              <div className="absolute -bottom-16 -left-16 w-48 h-48 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(249,115,22,0.06), transparent 70%)" }} />
-
-              <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2.5">성함 <span className="text-primary">*</span></label>
-                  <input type="text" required placeholder="홍길동" className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all bg-gray-50/50 focus:bg-white text-[15px]" />
-                </div>
-                <div>
-                  <label className="block text-sm font-bold text-gray-700 mb-2.5">연락처 <span className="text-primary">*</span></label>
-                  <input type="tel" required placeholder="010-0000-0000" className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all bg-gray-50/50 focus:bg-white text-[15px]" />
-                </div>
-              </div>
-
-              <div className="relative">
-                <label className="block text-sm font-bold text-gray-700 mb-2.5">희망 창업 지역</label>
-                <input type="text" placeholder="예: 서울 강남구" className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all bg-gray-50/50 focus:bg-white text-[15px]" />
-              </div>
-
-              <div className="relative">
-                <label className="block text-sm font-bold text-gray-700 mb-2.5">관심 브랜드</label>
-                <div className="flex flex-wrap gap-3">
-                  {BRANDS.map((b) => (
-                    <label key={b.name} className="flex items-center gap-2.5 px-5 py-3 rounded-2xl border border-gray-200 hover:border-primary cursor-pointer transition-all duration-300 hover:shadow-sm bg-gray-50/50 hover:bg-warm group">
-                      <input type="checkbox" className="w-4 h-4 text-primary rounded-md focus:ring-primary" />
-                      <span className="text-sm font-medium group-hover:text-primary transition-colors">{b.name}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative">
-                <label className="block text-sm font-bold text-gray-700 mb-2.5">구분</label>
-                <div className="flex gap-5">
-                  {["신규 창업", "업종 변경"].map((opt) => (
-                    <label key={opt} className="flex items-center gap-2 cursor-pointer group">
-                      <input type="radio" name="type" className="w-4 h-4 text-primary focus:ring-primary" />
-                      <span className="text-sm font-medium group-hover:text-primary transition-colors">{opt}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative">
-                <label className="block text-sm font-bold text-gray-700 mb-2.5">문의 내용</label>
-                <textarea rows={4} placeholder="궁금하신 점을 자유롭게 남겨주세요" className="w-full px-5 py-4 rounded-2xl border border-gray-200 focus:border-primary outline-none transition-all resize-none bg-gray-50/50 focus:bg-white text-[15px]" />
-              </div>
-
-              <button
-                type="submit"
-                className="relative w-full py-5 rounded-2xl text-lg font-bold text-white transition-all duration-300 hover:scale-[1.015] hover:shadow-xl overflow-hidden group"
-                style={{ background: "linear-gradient(135deg, #d4380d, #f97316)" }}
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  창업 상담 신청하기
-                  <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
-                {/* Shine effect */}
-                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)" }} />
-              </button>
-
-              <p className="text-xs text-gray-400 text-center">
-                제출 시 개인정보 수집 및 이용에 동의하는 것으로 간주합니다.
-              </p>
-            </form>
+            <ContactForm />
           </Anim>
         </div>
       </section>
