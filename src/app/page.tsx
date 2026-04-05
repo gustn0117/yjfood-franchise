@@ -857,6 +857,49 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ━━━━━━━━━━ SALES PROOF ━━━━━━━━━━ */}
+      <section className="relative py-32 sm:py-40 overflow-hidden bg-white">
+        <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full float-slow pointer-events-none" style={{ background: "radial-gradient(circle, rgba(253,242,233,0.8), transparent 60%)" }} />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] morph-blob float-slower pointer-events-none" style={{ background: "radial-gradient(circle, rgba(249,115,22,0.06), transparent 60%)" }} />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+          <Anim className="text-center mb-16">
+            <p className="gradient-label font-bold text-sm tracking-[0.25em] uppercase mb-4">Proven Results</p>
+            <p className="text-lg sm:text-xl text-gray-500 mb-6">확실한 맛과 꼼꼼한 점검으로 증명합니다.</p>
+            <h2 className="text-3xl sm:text-4xl md:text-[3.5rem] font-black leading-tight">
+              지역과 상관없이{" "}
+              <span className="relative inline-block text-primary">
+                압도적인 매출
+                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 8" preserveAspectRatio="none">
+                  <path d="M0 6 Q50 0 100 6 T200 6" stroke="#d4380d" strokeWidth="2.5" fill="none" opacity="0.35" />
+                </svg>
+              </span>
+            </h2>
+          </Anim>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
+            {[
+              { store: "수영점", amount: "7,000", unit: "만원", note: "최대 월 매출" },
+              { store: "금정점", amount: "6,000", unit: "만원", note: "최대 월 매출" },
+            ].map((s, i) => (
+              <Anim key={s.store} type="scale" delay={i * 150}>
+                <GlowCard className="relative text-center p-10 sm:p-12 rounded-[2rem] overflow-hidden border border-orange-100/80 card-3d bg-gradient-to-br from-white to-warm">
+                  <div className="relative z-10">
+                    <span className="inline-block px-4 py-1.5 rounded-full text-xs font-bold text-white mb-5" style={{ background: "linear-gradient(135deg, #d4380d, #f97316)" }}>
+                      {s.store}
+                    </span>
+                    <p className="text-sm text-gray-400 font-semibold mb-2">{s.note}</p>
+                    <div className="text-5xl sm:text-6xl font-black text-primary mb-1">
+                      <Counter value={s.amount} suffix={s.unit} />
+                    </div>
+                  </div>
+                </GlowCard>
+              </Anim>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ━━━━━━━━━━ BRANDS ━━━━━━━━━━ */}
       <section id="brands" className="relative py-32 sm:py-40 overflow-hidden" style={{ background: "linear-gradient(180deg, #f8f8f8, #ffffff)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
