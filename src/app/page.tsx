@@ -1214,7 +1214,7 @@ export default function Home() {
           <div className="pt-8 space-y-3">
             <div className="flex flex-wrap justify-center md:justify-start gap-x-4 gap-y-1 text-xs" style={{ color: "rgba(255,255,255,0.3)" }}>
               <span>(주)와이제이에프앤비</span>
-              <span>대표: 김용현</span>
+              <span>대표: 김용현, 임진형</span>
               <span>사업자등록번호: 402-88-03725</span>
               <span>법인등록번호: 180111-0165856</span>
             </div>
